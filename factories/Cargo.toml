@@ -1,8 +1,9 @@
 [package]
-name = "database"
+name = "factories"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+serialisers = { path = "../serialisers" }
+models = { path = "../models" }
 diesel = { version = "2.2.0", features = ["postgres"] }
-dotenvy = "0.15"

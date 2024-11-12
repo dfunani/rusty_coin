@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: rusty_user
+      POSTGRES_PASSWORD: rusty_password
+      POSTGRES_DB: rusty_coin_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      
+volumes:
+  db-data:
+

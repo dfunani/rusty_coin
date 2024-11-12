@@ -1,14 +1,9 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+pub mod blockchain;
+pub mod user;
+pub mod warehouse;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+use std::fmt::Debug;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+pub trait Model: Debug {
+    fn to_string(&self) -> String;
 }
