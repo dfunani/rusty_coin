@@ -17,25 +17,12 @@ fn main() {
     let user_data = user_object.get_mut("user").unwrap();
     println!("Created User: {:#?}", &user_data);
 
-    let mut user = read_user(db, user_data.e);
-    println!("Read User: {:#?}", user);
-
-    let private_id = String::from("8665da1a-a10f-4462-9eb0-5d48f2232f0d");
-    let mut data = UpdateUser {
-        password: Some(String::from("new")),
-        status: Some(Status::ACTIVE.to_string()),
-        role: Some(Role::DEVELOPER.to_string()),
-    };
-    user = update_user(db, private_id.clone(), &mut data);
-    println!("Updated User: {:#?}", user);
-
-    let result = delete_user(db, private_id);
-    println!("Deleted {:#?}", result);
-
     // println!("{:#?}", user_object.get_mut("account").unwrap());
     // println!("{:#?}", user_object.get_mut("payment").unwrap());
     // println!("{:#?}", user_object.get_mut("profile").unwrap());
     // println!("{:#?}", user_object.get_mut("settings").unwrap());
     // println!("{:#?}", user_object.get_mut("card").unwrap());
-    // println!("{:#?}", user_object.get_mut("login").unwrap());
+
+    let login_data = user_object.get_mut("login").unwrap();
+    println!("{:#?}", login_data);
 }

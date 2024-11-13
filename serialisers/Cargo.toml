@@ -8,6 +8,8 @@ models = { path = "../models" }
 database = { path = "../database" }
 shared = { path = "../shared" }
 diesel = { version = "2.2.0", features = ["postgres"] }
+chrono = { version = "0.4.38" }
+
 
 [dependencies.uuid]
 version = "1.10.0"

@@ -1,6 +1,6 @@
 use diesel::PgConnection;
 use models::Model;
-use serialisers::user::users::create_user;
+use serialisers::{user::users::create_user, warehouse::login_histories::create_login_hostory};
 
 use std::collections::HashMap;
 
@@ -10,7 +10,7 @@ pub fn generate_user(
     user_password: String,
 ) -> HashMap<String, Box<dyn Model>> {
     let response = create_user(db, user_email, user_password);
-    
+
     // let account = Account {
     //     id: Uuid::new_v4(),
     //     account_id: Uuid::new_v4(),
@@ -82,27 +82,16 @@ pub fn generate_user(
     //     updated_date: Local::now(),
     // };
 
-    // let login = LoginHistory {
-    //     id: Uuid::new_v4(),
-    //     login_id: Uuid::new_v4(),
-    //     user_id: Uuid::new_v4(),
-    //     session_id: Uuid::new_v4(),
-    //     login_date: Local::now(),
-    //     login_location: Country::AFGHANISTAN,
-    //     login_device: String::from("String"),
-    //     login_method: LoginMethod::EMAIL,
-    //     logged_in: true,
-    //     logout_date: None,
-    //     authentication_token: Local::now(),
-    // };
+    let login = create_login_hostory(db);
 
     let mut dict: HashMap<String, Box<dyn Model>> = HashMap::new();
     dict.insert(String::from("user"), Box::new(response));
+    dict.insert(String::from("login"), Box::new(login));
+
     // dict.insert(String::from("account"), Box::new(account));
     // dict.insert(String::from("payment"), Box::new(payment));
     // dict.insert(String::from("profile"), Box::new(profile));
     // dict.insert(String::from("settings"), Box::new(settings));
     // dict.insert(String::from("card"), Box::new(card));
-    // dict.insert(String::from("login"), Box::new(login));
     return dict;
 }

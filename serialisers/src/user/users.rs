@@ -34,7 +34,7 @@ pub fn create_user(db: &mut PgConnection, user_email: String, user_password: Str
         .values(&user)
         .returning(User::as_returning())
         .get_result(db)
-        .expect("msg");
+        .expect("Invalid User.");
     return response;
 }
 
