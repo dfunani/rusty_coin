@@ -21,8 +21,8 @@ fn main() {
     // println!("{:#?}", user_object.get_mut("payment").unwrap());
     // println!("{:#?}", user_object.get_mut("profile").unwrap());
     // println!("{:#?}", user_object.get_mut("settings").unwrap());
-    // println!("{:#?}", user_object.get_mut("card").unwrap());
-
+    
+    println!("{:#?}", user_object.get_mut("card").unwrap());
     let login_data = user_object.get_mut("login").unwrap();
     println!("{:#?}", login_data);
 }

@@ -11,6 +11,8 @@ CREATE TABLE "login_histories"(
 	"login_method" TEXT NOT NULL,
 	"logged_in" BOOLEAN NOT NULL,
 	"logout_date" TIMESTAMP NOT NULL,
-	"authentication_token" TEXT NOT NULL
+	"authentication_token" TEXT NOT NULL,
+	"created_at" TIMESTAMP NOT NULL,
+	"updated_at" TIMESTAMP NOT NULL,
 );
 

@@ -1,6 +1,6 @@
 use diesel::PgConnection;
-use models::Model;
-use serialisers::{user::users::create_user, warehouse::login_histories::create_login_hostory};
+use models::{warehouse::cards::Card, Model};
+use serialisers::{user::users::create_user, warehouse::{cards::create_cards, login_histories::create_login_history}};
 
 use std::collections::HashMap;
 
@@ -70,23 +70,14 @@ pub fn generate_user(
     //     updated_date: Local::now(),
     // };
 
-    // let card = Card {
-    //     id: Uuid::new_v4(),
-    //     card_id: Uuid::new_v4(),
-    //     card_number: String::from("String"),
-    //     card_type: CardType::CHEQUE,
-    //     status: Status::NEW,
-    //     pin: String::from("123456"),
-    //     salt_value: Uuid::new_v4(),
-    //     created_date: Local::now(),
-    //     updated_date: Local::now(),
-    // };
+    let card = create_cards(db);
 
-    let login = create_login_hostory(db);
+    let login = create_login_history(db);
 
     let mut dict: HashMap<String, Box<dyn Model>> = HashMap::new();
     dict.insert(String::from("user"), Box::new(response));
     dict.insert(String::from("login"), Box::new(login));
+    dict.insert(String::from("card"), Box::new(card));
 
     // dict.insert(String::from("account"), Box::new(account));
     // dict.insert(String::from("payment"), Box::new(payment));

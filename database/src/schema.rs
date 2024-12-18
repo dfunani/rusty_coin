@@ -9,6 +9,8 @@ diesel::table! {
         status -> Text,
         role -> Text,
         salt_value -> Text,
+        created_date -> Timestamp,
+updated_date -> Timestamp,
     }
 }
 
@@ -18,6 +20,8 @@ diesel::table! {
         account_id -> Text,
         user_id -> Text,
         status -> Text,
+        created_date -> Timestamp,
+updated_date -> Timestamp,
     }
 }
 
@@ -31,6 +35,8 @@ diesel::table! {
     description -> Text,
     status -> Text,
     balance -> Text,
+    created_date -> Timestamp,
+    updated_date -> Timestamp,
     }
 }
 
@@ -53,6 +59,8 @@ occupation -> Text,
 interests -> Jsonb,
 social_media_links -> Jsonb,
 status -> Text,
+created_date -> Timestamp,
+updated_date -> Timestamp,
     }
 }
 
@@ -89,6 +97,8 @@ diesel::table! {
         logged_in -> Bool,
         logout_date -> Timestamp,
         authentication_token -> Text,
+        created_date -> Timestamp,
+updated_date -> Timestamp,
     }
 }
 

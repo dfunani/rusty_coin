@@ -6,7 +6,7 @@ use models::warehouse::login_histories::LoginHistory;
 use shared::constants::users::{Country, LoginMethod};
 use uuid::Uuid;
 
-pub fn create_login_hostory(db: &mut PgConnection) -> LoginHistory {
+pub fn create_login_history(db: &mut PgConnection) -> LoginHistory {
     let login = LoginHistory {
         id: Uuid::new_v4().to_string(),
         login_id: Uuid::new_v4().to_string(),
@@ -19,6 +19,8 @@ pub fn create_login_hostory(db: &mut PgConnection) -> LoginHistory {
         logged_in: true,
         logout_date: Local::now().naive_local(),
         authentication_token: Uuid::new_v4().to_string(),
+        updated_date: Local::now().naive_local(),
+        created_date: Local::now().naive_local(),
     };
     let login_history = diesel::insert_into(login_histories::table)
         .values(&login)

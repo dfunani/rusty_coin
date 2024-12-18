@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+use chrono::Local;
 use database::schema::users;
 use database::schema::users::dsl::*;
 use diesel::{ExpressionMethods, PgConnection, QueryDsl, RunQueryDsl, SelectableHelper};
@@ -28,6 +29,8 @@ pub fn create_user(db: &mut PgConnection, user_email: String, user_password: Str
         status: Status::NEW.to_string(),
         role: Role::USER.to_string(),
         salt_value: Uuid::new_v4().to_string(),
+        updated_date: Local::now().naive_local(),
+        created_date: Local::now().naive_local(),
     };
 
     let response = diesel::insert_into(users::table)
@@ -56,6 +59,11 @@ pub fn update_user(db: &mut PgConnection, private_id: String, data: &mut UpdateU
     if data.password != None {
         data.password = Some(hash(data.password.as_ref().unwrap()));
     };
+
+    if data.updated_date != None {
+        data.updated_date = Some(Local::now().naive_local());
+    }
+
     let update_data = data.clone();
     let response = diesel::update(users.find(private_id))
         .set(update_data)

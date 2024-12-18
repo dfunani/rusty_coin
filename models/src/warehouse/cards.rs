@@ -1,23 +1,25 @@
-// use chrono::{DateTime, Local};
-// use uuid::Uuid;
+use crate::Model;
+use chrono::NaiveDateTime;
+use database::schema::cards;
+use diesel::prelude::*;
+use std::cmp::{Eq, Ord, PartialEq, PartialOrd};
 
-// use crate::{models::model::Model, shared::constants::user::{CardType, Status}};
+#[derive(Queryable, Insertable, Selectable, Debug, Ord, Eq, PartialOrd, PartialEq, Clone)]
+#[diesel(table_name = cards)]
+pub struct Card {
+    pub id: String,
+    pub card_id: String,
+    pub card_number: String,
+    pub card_type: String,
+    pub status: String,
+    pub pin: String,
+    pub salt_value: String,
+    pub created_date: NaiveDateTime,
+    pub updated_date: NaiveDateTime,
+}
 
-// #[derive(Debug)]
-// pub struct Card {
-//     pub id: Uuid,
-//     pub card_id: Uuid,
-//     pub card_number: String,
-//     pub card_type: CardType,
-//     pub status: Status,
-//     pub pin: String,
-//     pub salt_value: Uuid,
-//     pub created_date: DateTime<Local>,
-//     pub updated_date: DateTime<Local>,
-// }
-
-// impl Model for Card {
-//     fn to_string(&self) -> String {
-//         return String::from(format!("Card ID: {}", self.card_id.to_string()));
-//     }
-// }
+impl Model for Card {
+    fn to_string(&self) -> String {
+        return String::from(format!("Login history ID: {}", self.card_id.to_string()));
+    }
+}

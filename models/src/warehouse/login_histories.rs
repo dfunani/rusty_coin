@@ -18,6 +18,8 @@ pub struct LoginHistory {
     pub logged_in: bool,
     pub logout_date: NaiveDateTime,
     pub authentication_token: String,
+    pub updated_date: NaiveDateTime,
+    pub created_date: NaiveDateTime,
 }
 
 impl Model for LoginHistory {
