@@ -7,4 +7,4 @@ custom_type_derives = ["diesel::query_builder::QueryId", "Clone"]
 schema = "users"
 
 [migrations_directory]
-dir = "/home/afrodevhub/build-your-own-x/blockchain/rusty_coin/migrations"
+dir = "./migrations"

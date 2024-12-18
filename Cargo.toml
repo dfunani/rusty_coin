@@ -4,5 +4,6 @@ members = [
  "app",
  "models", 
  "shared",
- "serialisers"
- , "factories"]
+ "serialisers",
+ "factories"
+ ]
