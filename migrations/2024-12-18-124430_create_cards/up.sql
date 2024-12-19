@@ -8,6 +8,6 @@ CREATE TABLE "cards"(
 	"status" TEXT NOT NULL,
 	"pin" TEXT NOT NULL,
 	"salt_value" TEXT NOT NULL,
-	"created_at" TIMESTAMP NOT NULL,
-	"updated_at" TIMESTAMP NOT NULL,
+	"created_date" TIMESTAMP NOT NULL,
+	"updated_date" TIMESTAMP NOT NULL
 );

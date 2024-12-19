@@ -29,8 +29,8 @@ pub fn create_user(db: &mut PgConnection, user_email: String, user_password: Str
         status: Status::NEW.to_string(),
         role: Role::USER.to_string(),
         salt_value: Uuid::new_v4().to_string(),
-        updated_date: Local::now().naive_local(),
         created_date: Local::now().naive_local(),
+        updated_date: Local::now().naive_local(),
     };
 
     let response = diesel::insert_into(users::table)

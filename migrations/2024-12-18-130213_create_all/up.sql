@@ -18,8 +18,8 @@ CREATE TABLE "profiles"(
 	"interests" JSONB NOT NULL,
 	"social_media_links" JSONB NOT NULL,
 	"status" TEXT NOT NULL,
-	"created_at" TIMESTAMP NOT NULL,
-	"updated_at" TIMESTAMP NOT NULL
+	"created_date" TIMESTAMP NOT NULL,
+	"updated_date" TIMESTAMP NOT NULL
 );
 
 CREATE TABLE "payments"(
@@ -31,8 +31,8 @@ CREATE TABLE "payments"(
 	"description" TEXT NOT NULL,
 	"status" TEXT NOT NULL,
 	"balance" NUMERIC NOT NULL,
-	"created_at" TIMESTAMP NOT NULL,
-	"updated_at" TIMESTAMP NOT NULL
+	"created_date" TIMESTAMP NOT NULL,
+	"updated_date" TIMESTAMP NOT NULL
 );
 
 CREATE TABLE "accounts"(
@@ -40,8 +40,8 @@ CREATE TABLE "accounts"(
 	"account_id" TEXT NOT NULL,
 	"user_id" TEXT NOT NULL,
 	"status" TEXT NOT NULL,
-	"created_at" TIMESTAMP NOT NULL,
-	"updated_at" TIMESTAMP NOT NULL
+	"created_date" TIMESTAMP NOT NULL,
+	"updated_date" TIMESTAMP NOT NULL
 );
 
 CREATE TABLE "settings"(
@@ -59,8 +59,6 @@ CREATE TABLE "settings"(
 	"cookies_enabled" BOOL NOT NULL,
 	"theme_preference" TEXT NOT NULL,
 	"created_date" TIMESTAMP NOT NULL,
-	"updated_date" TIMESTAMP NOT NULL,
-	"created_at" TIMESTAMP NOT NULL,
-	"updated_at" TIMESTAMP NOT NULL
+	"updated_date" TIMESTAMP NOT NULL
 );
 

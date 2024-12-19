@@ -12,7 +12,7 @@ CREATE TABLE "login_histories"(
 	"logged_in" BOOLEAN NOT NULL,
 	"logout_date" TIMESTAMP NOT NULL,
 	"authentication_token" TEXT NOT NULL,
-	"created_at" TIMESTAMP NOT NULL,
-	"updated_at" TIMESTAMP NOT NULL,
+	"created_date" TIMESTAMP NOT NULL,
+	"updated_date" TIMESTAMP NOT NULL
 );
 
