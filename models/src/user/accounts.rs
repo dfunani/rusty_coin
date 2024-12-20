@@ -1,38 +1,18 @@
+use chrono::NaiveDateTime;
 use database::schema::accounts;
 use diesel::prelude::*;
-use rocket::serde::{Deserialize, Serialize};
-use std::cmp::{Eq, Ord, PartialEq, PartialOrd};
 
 use crate::Model;
 
-#[derive(
-    Queryable,
-    Insertable,
-    Selectable,
-    Debug,
-    Ord,
-    Eq,
-    PartialOrd,
-    PartialEq,
-    Serialize,
-    Deserialize,
-    Clone,
-)]
+#[derive(Queryable, Insertable, Selectable, Debug)]
 #[diesel(table_name = accounts)]
 pub struct Account {
     pub id: String,
     pub account_id: String,
     pub user_id: String,
     pub status: String,
-}
-
-#[derive(AsChangeset, Clone, Selectable)]
-#[diesel(table_name = accounts)]
-pub struct UpdateAccount {
-    pub id: String,
-    pub account_id: String,
-    pub user_id: String,
-    pub status: String,
+    pub created_date: NaiveDateTime,
+    pub updated_date: NaiveDateTime,
 }
 
 impl Model for Account {

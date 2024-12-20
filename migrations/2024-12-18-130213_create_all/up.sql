@@ -30,7 +30,7 @@ CREATE TABLE "payments"(
 	"name" TEXT NOT NULL,
 	"description" TEXT NOT NULL,
 	"status" TEXT NOT NULL,
-	"balance" NUMERIC NOT NULL,
+	"balance" FLOAT NOT NULL,
 	"created_date" TIMESTAMP NOT NULL,
 	"updated_date" TIMESTAMP NOT NULL
 );

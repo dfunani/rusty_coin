@@ -419,6 +419,7 @@ dependencies = [
  "num-integer",
  "num-traits",
  "pq-sys",
+ "serde_json",
 ]
 
 [[package]]
@@ -432,6 +433,17 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "diesel_json"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0fc50de1d729b55dfbb03e2d2db846684e3ab585f4ee9cfc3c675d236f951888"
+dependencies = [
+ "diesel",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -958,6 +970,7 @@ dependencies = [
  "chrono",
  "database",
  "diesel",
+ "diesel_json",
  "rocket",
  "serde",
  "uuid",

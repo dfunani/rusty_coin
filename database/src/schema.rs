@@ -34,7 +34,7 @@ diesel::table! {
     name -> Text,
     description -> Text,
     status -> Text,
-    balance -> Text,
+    balance -> Float8,
     created_date -> Timestamp,
     updated_date -> Timestamp,
     }
