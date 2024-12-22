@@ -17,9 +17,7 @@ use crate::warehouse::cards::create_cards;
 
 pub fn create_payments_profile(
     db: &mut PgConnection,
-    account_id: String,
-    name: String,
-    description: String,
+    account_id: String
 ) -> Payment {
     let card = create_cards(db);
 
@@ -28,8 +26,8 @@ pub fn create_payments_profile(
         payment_id: Uuid::new_v4().to_string(),
         account_id: account_id,
         card_id: card.id,
-        name: name,
-        description: description,
+        name: String::from("New Payment Profile"),
+        description: String::from("New Payment Profile Created."),
         balance: 0.0,
         status: Status::NEW.to_string(),
         created_date: Local::now().naive_local(),

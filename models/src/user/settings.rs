@@ -12,7 +12,7 @@ pub struct Interests {
 
 #[derive(Queryable, Insertable, Selectable, Debug)]
 #[diesel(table_name = settings)]
-pub struct Account {
+pub struct Settings {
     pub id: String,
     pub settings_id: String,
     pub account_id: String,
@@ -21,7 +21,7 @@ pub struct Account {
     pub mfa_enabled: String,
     pub mfa_last_used_date: NaiveDateTime,
     pub profile_visibility_preference: String,
-    pub data_sharing_preferences: diesel_json::Json<Interests>,
+    pub data_sharing_preferences: String,
     pub communication_preference: String,
     pub location_tracking_enabled: bool,
     pub cookies_enabled: bool,
@@ -30,7 +30,7 @@ pub struct Account {
     pub updated_date: NaiveDateTime,
 }
 
-impl Model for Account {
+impl Model for Settings {
     fn to_string(&self) -> String {
         return String::from(format!("Account ID: {}", self.account_id.to_string()));
     }

@@ -9,7 +9,8 @@ database = { path = "../database" }
 shared = { path = "../shared" }
 diesel = { version = "2.2.0", features = ["postgres"] }
 chrono = { version = "0.4.38" }
-
+diesel_json = { version = "0.2.1" }
+serde_json = { version = "1.0.134" }
 
 [dependencies.uuid]
 version = "1.10.0"
