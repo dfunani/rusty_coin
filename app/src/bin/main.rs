@@ -23,7 +23,7 @@ fn main() {
     let contractee_id = String::from("88dffaad-5d15-4a8d-8c64-8ad28f28dac2");
     let contract = create_contract(db, contractor_id.clone(), contractee_id.clone());
     let transaction = create_transaction(db, contractor_id.clone(), contractee_id.clone());
-    let block = create_block(db, contractor_id.clone(), contractee_id.clone());
+    let block = create_block(db, contractor_id.clone(), String::from(""));
 
     println!("{:#?}", user_object.get_mut("user").unwrap());
     println!("{:#?}", user_object.get_mut("account").unwrap());
