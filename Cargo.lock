@@ -523,6 +523,7 @@ dependencies = [
  "diesel",
  "models",
  "serialisers",
+ "shared",
 ]
 
 [[package]]
