@@ -9,14 +9,14 @@ use uuid::Uuid;
 
 pub fn create_contract(
     db: &mut PgConnection,
-    contractor_id: String,
-    contractee_id: String,
+    contractor_payment_id: &str,
+    contractee_payment_id: &str,
 ) -> Contract {
     let account = Contract {
         id: Uuid::new_v4().to_string(),
         contract_id: Uuid::new_v4().to_string(),
-        contractor: contractor_id,
-        contractee: contractee_id,
+        contractor: contractor_payment_id.to_string(),
+        contractee: contractee_payment_id.to_string(),
         title: String::from("New Contract"),
         description: String::from("New Contract Created"),
         contract: String::from(""),
@@ -36,9 +36,9 @@ pub fn create_contract(
     return response;
 }
 
-pub fn read_contract(db: &mut PgConnection, public_id: String) -> Contract {
+pub fn read_contract(db: &mut PgConnection, public_contract_id: &str) -> Contract {
     let responses: Vec<Contract> = contracts
-        .filter(contract_id.eq(public_id))
+        .filter(contract_id.eq(public_contract_id))
         .load(db)
         .expect("Invalid Account ID.");
 

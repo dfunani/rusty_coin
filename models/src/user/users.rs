@@ -30,6 +30,6 @@ pub struct UpdateUser {
 
 impl Model for User {
     fn to_string(&self) -> String {
-        return String::from(format!("User ID: {}", self.user_id.to_string()));
+        return String::from(format!("User ID: {}", self.user_id));
     }
 }

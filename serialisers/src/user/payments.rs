@@ -15,13 +15,13 @@ use uuid::Uuid;
 
 use crate::warehouse::cards::create_cards;
 
-pub fn create_payments_profile(db: &mut PgConnection, public_account_id: String) -> Payment {
+pub fn create_payments_profile(db: &mut PgConnection, private_account_id: &str) -> Payment {
     let card = create_cards(db);
 
     let payment = Payment {
         id: Uuid::new_v4().to_string(),
         payment_id: Uuid::new_v4().to_string(),
-        account_id: public_account_id,
+        account_id: private_account_id.to_string(),
         card_id: card.card_id,
         name: String::from("New Payment Profile"),
         description: String::from("New Payment Profile Created."),
@@ -39,9 +39,9 @@ pub fn create_payments_profile(db: &mut PgConnection, public_account_id: String)
     return response;
 }
 
-pub fn read_payments_profile(db: &mut PgConnection, public_id: String) -> Payment {
+pub fn read_payments_profile(db: &mut PgConnection, public_payments_id: &str) -> Payment {
     let responses: Vec<Payment> = payments
-        .filter(payment_id.eq(public_id))
+        .filter(payment_id.eq(public_payments_id))
         .load(db)
         .expect("Invalid Payment ID.");
 

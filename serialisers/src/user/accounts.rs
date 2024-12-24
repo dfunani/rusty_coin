@@ -9,11 +9,11 @@ use models::user::accounts::Account;
 use shared::constants::users::{Role, Status};
 use uuid::Uuid;
 
-pub fn create_account(db: &mut PgConnection, private_user_id: String) -> Account {
+pub fn create_account(db: &mut PgConnection, private_user_id: &str) -> Account {
     let account = Account {
         id: Uuid::new_v4().to_string(),
         account_id: Uuid::new_v4().to_string(),
-        user_id: private_user_id,
+        user_id: private_user_id.to_string(),
         status: Status::NEW.to_string(),
         created_date: Local::now().naive_local(),
         updated_date: Local::now().naive_local(),
@@ -27,9 +27,9 @@ pub fn create_account(db: &mut PgConnection, private_user_id: String) -> Account
     return response;
 }
 
-pub fn read_account(db: &mut PgConnection, public_id: String) -> Account {
+pub fn read_account(db: &mut PgConnection, public_account_id: &str) -> Account {
     let responses: Vec<Account> = accounts
-        .filter(account_id.eq(public_id))
+        .filter(account_id.eq(public_account_id))
         .load(db)
         .expect("Invalid Account ID.");
 

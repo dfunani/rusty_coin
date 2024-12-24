@@ -9,13 +9,13 @@ use models::user::profiles::Profile;
 use shared::constants::users::{Role, Status};
 use uuid::Uuid;
 
-pub fn create_profile(db: &mut PgConnection, public_account_id: String) -> Profile {
+pub fn create_profile(db: &mut PgConnection, private_account_id: &str) -> Profile {
     let interest: Vec<String> = vec![];
     let socials: HashMap<String, String> = HashMap::new();
     let profile = Profile {
         id: Uuid::new_v4().to_string(),
         profile_id: Uuid::new_v4().to_string(),
-        account_id: public_account_id,
+        account_id: private_account_id.to_string(),
         first_name: String::from(""),
         last_name: String::from(""),
         username: String::from(""),
@@ -42,9 +42,9 @@ pub fn create_profile(db: &mut PgConnection, public_account_id: String) -> Profi
     return response;
 }
 
-pub fn read_profile(db: &mut PgConnection, public_id: String) -> Profile {
+pub fn read_profile(db: &mut PgConnection, public_profile_id: &str) -> Profile {
     let responses: Vec<Profile> = profiles
-        .filter(profile_id.eq(public_id))
+        .filter(profile_id.eq(public_profile_id))
         .load(db)
         .expect("Invalid User ID.");
 

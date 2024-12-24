@@ -9,8 +9,8 @@ use uuid::Uuid;
 
 pub fn create_block(
     db: &mut PgConnection,
-    private_transaction_id: String,
-    private_contract_id: String,
+    private_transaction_id: &str,
+    private_contract_id: &str,
 ) -> Block {
     if private_transaction_id != "" && private_contract_id != "" {
         panic!("Invalid Block")
@@ -27,8 +27,8 @@ pub fn create_block(
     let account = Block {
         id: Uuid::new_v4().to_string(),
         block_id: Uuid::new_v4().to_string(),
-        transaction_id: private_transaction_id,
-        contract_id: private_contract_id,
+        transaction_id: private_transaction_id.to_string(),
+        contract_id: private_contract_id.to_string(),
         previous_block_id: String::from(""),
         next_block_id: String::from(""),
         block_type: blocktype,
@@ -44,9 +44,9 @@ pub fn create_block(
     return response;
 }
 
-pub fn read_block(db: &mut PgConnection, public_id: String) -> Block {
+pub fn read_block(db: &mut PgConnection, public_block_id: &str) -> Block {
     let responses: Vec<Block> = blocks
-        .filter(block_id.eq(public_id))
+        .filter(block_id.eq(public_block_id))
         .load(db)
         .expect("Invalid Block ID.");
 

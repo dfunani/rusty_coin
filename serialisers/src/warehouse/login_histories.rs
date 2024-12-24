@@ -7,11 +7,11 @@ use models::warehouse::login_histories::LoginHistory;
 use shared::constants::users::{Country, LoginMethod};
 use uuid::Uuid;
 
-pub fn create_login_history(db: &mut PgConnection) -> LoginHistory {
+pub fn create_login_history(db: &mut PgConnection, private_user_id: &str) -> LoginHistory {
     let login = LoginHistory {
         id: Uuid::new_v4().to_string(),
         login_id: Uuid::new_v4().to_string(),
-        user_id: Uuid::new_v4().to_string(),
+        user_id: private_user_id.to_string(),
         session_id: Uuid::new_v4().to_string(),
         login_date: Local::now().naive_local(),
         login_location: Country::AFGHANISTAN.to_string().0,
@@ -31,7 +31,7 @@ pub fn create_login_history(db: &mut PgConnection) -> LoginHistory {
     return login_history;
 }
 
-pub fn read_login_history(db: &mut PgConnection, public_id: String) -> LoginHistory {
+pub fn read_login_history(db: &mut PgConnection, public_id: &str) -> LoginHistory {
     let responses: Vec<LoginHistory> = login_histories
         .filter(login_id.eq(public_id))
         .load(db)

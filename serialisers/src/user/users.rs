@@ -13,7 +13,7 @@ use shared::cryptography::hashing::hash;
 use shared::cryptography::utils::generate_key;
 use uuid::Uuid;
 
-pub fn create_user(db: &mut PgConnection, user_email: String, user_password: String) -> User {
+pub fn create_user(db: &mut PgConnection, user_email: &str, user_password: &str) -> User {
     let key = generate_key();
 
     let enc_email = encrypt(user_email.as_bytes(), key.as_bytes());
@@ -41,9 +41,9 @@ pub fn create_user(db: &mut PgConnection, user_email: String, user_password: Str
     return response;
 }
 
-pub fn read_user(db: &mut PgConnection, public_id: String) -> User {
+pub fn read_user(db: &mut PgConnection, public_user_id: &str) -> User {
     let responses: Vec<User> = users
-        .filter(user_id.eq(public_id))
+        .filter(user_id.eq(public_user_id))
         .load(db)
         .expect("Invalid User ID.");
 
@@ -72,8 +72,8 @@ pub fn update_user(db: &mut PgConnection, private_id: String, data: &mut UpdateU
     return response;
 }
 
-pub fn delete_user(db: &mut PgConnection, private_id: String) -> String {
-    diesel::delete(users.find(private_id.clone()))
+pub fn delete_user(db: &mut PgConnection, private_id: &str) -> String {
+    diesel::delete(users.find(&private_id))
         .returning(User::as_returning())
         .execute(db)
         .expect("Invalid ID - User");

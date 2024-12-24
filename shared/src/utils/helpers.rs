@@ -1,7 +1,7 @@
 use regex::Regex;
 
-pub fn extract_object_id(public_id: &str) -> String {
+pub fn extract_object_id(public_id: &str) -> &str {
     let regex = Regex::new(r"^.*: (.*)$").unwrap();
     let result = regex.captures(public_id).unwrap();
-    return String::from(result.get(1).unwrap().as_str());
+    return result.get(1).unwrap().as_str();
 }

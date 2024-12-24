@@ -22,15 +22,15 @@ use std::collections::HashMap;
 
 pub fn generate_user(
     db: &mut PgConnection,
-    user_email: String,
-    user_password: String,
-) -> HashMap<String, Box<dyn Model>> {
+    user_email: &str,
+    user_password: &str,
+) -> HashMap<&'static str, String> {
     let mut user = create_user(db, user_email, user_password);
-    let mut account = create_account(db, String::from(&user.id));
-    let mut payment = create_payments_profile(db, String::from(&account.id));
-    let mut profile = create_profile(db, String::from(&account.id));
-    let mut settings = create_settings(db, String::from(&account.id));
-    let mut login = create_login_history(db);
+    let mut account = create_account(db, &user.id);
+    let mut payment = create_payments_profile(db, &account.id);
+    let mut profile = create_profile(db, &account.id);
+    let mut settings = create_settings(db, &account.id);
+    let mut login = create_login_history(db, &user.id);
 
     user = read_user(db, extract_object_id(&user.to_string()));
     account = read_account(db, extract_object_id(&account.to_string()));
@@ -38,38 +38,38 @@ pub fn generate_user(
     profile = read_profile(db, extract_object_id(&profile.to_string()));
     settings = read_settings(db, extract_object_id(&settings.to_string()));
     login = read_login_history(db, extract_object_id(&login.to_string()));
-    let card = read_card(db, String::from(&payment.card_id));
+    let card = read_card(db, &payment.card_id);
 
-    let mut dict: HashMap<String, Box<dyn Model>> = HashMap::new();
+    let mut dict: HashMap<&str, String> = HashMap::new();
 
-    dict.insert(String::from("user"), Box::new(user));
-    dict.insert(String::from("account"), Box::new(account));
-    dict.insert(String::from("payment"), Box::new(payment));
-    dict.insert(String::from("profile"), Box::new(profile));
-    dict.insert(String::from("settings"), Box::new(settings));
-    dict.insert(String::from("login"), Box::new(login));
-    dict.insert(String::from("card"), Box::new(card));
+    dict.insert("user", user.id);
+    dict.insert("account", account.id);
+    dict.insert("payment", payment.id);
+    dict.insert("profile", profile.id);
+    dict.insert("settings", settings.id);
+    dict.insert("login", login.id);
+    dict.insert("card", card.id);
 
     return dict;
 }
 
 pub fn generate_block(
     db: &mut PgConnection,
-    party_a_payment_id: String,
-    party_b_payment_id: String,
+    party_a_payment_id: &str,
+    party_b_payment_id: &str,
     block_type: BlockType,
 ) -> Block {
     match block_type {
         BlockType::CONTRACT => {
             let response = create_contract(db, party_a_payment_id, party_b_payment_id);
-            return create_block(db, String::from(""), response.id);
+            return create_block(db, "", &response.id);
         }
         BlockType::TRANSACTION => {
             let response = create_transaction(db, party_a_payment_id, party_b_payment_id);
-            return create_block(db, response.id, String::from(""));
+            return create_block(db, &response.id, "");
         }
         BlockType::UNIT => {
-            return create_block(db, String::from(""), String::from(""));
+            return create_block(db, "", "");
         }
     }
 }

@@ -14,12 +14,12 @@ use shared::cryptography::hashing::hash;
 use shared::cryptography::utils::generate_key;
 use uuid::Uuid;
 
-pub fn create_settings(db: &mut PgConnection, public_account_id: String) -> Settings {
+pub fn create_settings(db: &mut PgConnection, private_account_id: &str) -> Settings {
     let data_sharing: Vec<String> = vec![];
     let setting = Settings {
         id: Uuid::new_v4().to_string(),
         settings_id: Uuid::new_v4().to_string(),
-        account_id: public_account_id,
+        account_id: private_account_id.to_string(),
         email_status: String::from(""),
         communication_status: String::from(""),
         mfa_enabled: String::from(""),
@@ -43,9 +43,9 @@ pub fn create_settings(db: &mut PgConnection, public_account_id: String) -> Sett
     return response;
 }
 
-pub fn read_settings(db: &mut PgConnection, public_id: String) -> Settings {
+pub fn read_settings(db: &mut PgConnection, public_settings_id: &str) -> Settings {
     let responses: Vec<Settings> = settings
-        .filter(settings_id.eq(public_id))
+        .filter(settings_id.eq(public_settings_id))
         .load(db)
         .expect("Invalid User ID.");
 

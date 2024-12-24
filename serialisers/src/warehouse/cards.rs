@@ -27,13 +27,12 @@ pub fn create_cards(db: &mut PgConnection) -> Card {
     return card;
 }
 
-pub fn read_card(db: &mut PgConnection, public_id: String) -> Card {
+pub fn read_card(db: &mut PgConnection, public_card_id: &str) -> Card {
     let responses: Vec<Card> = cards
-        .filter(card_id.eq(&public_id))
+        .filter(card_id.eq(public_card_id))
         .load(db)
         .expect("Invalid Card ID.");
 
-    println!("{:#?}", public_id.as_str());
     if responses.len() != 1 {
         panic!("Invalid Card ID.");
     }

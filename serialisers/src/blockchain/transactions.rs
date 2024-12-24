@@ -9,14 +9,14 @@ use uuid::Uuid;
 
 pub fn create_transaction(
     db: &mut PgConnection,
-    sender_id: String,
-    receiver_id: String,
+    sender_payment_id: &str,
+    receiver_payment_id: &str,
 ) -> Transaction {
     let account = Transaction {
         id: Uuid::new_v4().to_string(),
         transaction_id: Uuid::new_v4().to_string(),
-        sender: sender_id,
-        receiver: receiver_id,
+        sender: sender_payment_id.to_string(),
+        receiver: receiver_payment_id.to_string(),
         title: String::from("New Contract"),
         description: String::from("New Contract Created"),
         amount: 0.0,
@@ -36,9 +36,9 @@ pub fn create_transaction(
     return response;
 }
 
-pub fn read_transaction(db: &mut PgConnection, public_id: String) -> Transaction {
+pub fn read_transaction(db: &mut PgConnection, public_transactions_id: &str) -> Transaction {
     let responses: Vec<Transaction> = transactions
-        .filter(transaction_id.eq(public_id))
+        .filter(transaction_id.eq(public_transactions_id))
         .load(db)
         .expect("Invalid Account ID.");
 
