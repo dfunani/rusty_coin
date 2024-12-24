@@ -1,3 +1,3 @@
 pub mod blocks;
-pub mod contracts;
 pub mod transactions;
+pub mod contracts;

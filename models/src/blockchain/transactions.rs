@@ -1,30 +1,32 @@
-// use chrono::{DateTime, Local};
-// use uuid::Uuid;
+use chrono::NaiveDateTime;
+use database::schema::transactions;
+use diesel::prelude::*;
 
-// use crate::{models::model::Model, shared::constants::blockchain::TransactionStatus};
+use crate::Model;
 
-// #[derive(Debug)]
-// pub struct Transaction {
-//     id: Uuid,
-//     transaction_id: Uuid,
-//     sender: Uuid,
-//     receiver: Uuid,
-//     amount: f64,
-//     title: String,
-//     description: String,
-//     sender_signiture: String,
-//     receiver_signiture: String,
-//     transaction_status: TransactionStatus,
-//     salt_value: Uuid,
-//     created_date: DateTime<Local>,
-//     updated_date: DateTime<Local>,
-// }
+#[derive(Queryable, Insertable, Selectable, Debug)]
+#[diesel(table_name = transactions)]
+pub struct Transaction {
+    pub id: String,
+    pub transaction_id: String,
+    pub sender: String,
+    pub receiver: String,
+    pub amount: f64,
+    pub title: String,
+    pub description: String,
+    pub sender_signiture: String,
+    pub receiver_signiture: String,
+    pub transaction_status: String,
+    pub salt_value: String,
+    pub created_date: NaiveDateTime,
+    pub updated_date: NaiveDateTime,
+}
 
-// impl Model for Transaction {
-//     fn to_string(&self) -> String {
-//         return String::from(format!(
-//             "Transaction ID: {}",
-//             self.transaction_id.to_string()
-//         ));
-//     }
-// }
+impl Model for Transaction {
+    fn to_string(&self) -> String {
+        return String::from(format!(
+            "Transaction ID: {}",
+            self.transaction_id.to_string()
+        ));
+    }
+}

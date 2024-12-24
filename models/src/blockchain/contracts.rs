@@ -1,27 +1,29 @@
-// use chrono::{DateTime, Local};
-// use uuid::Uuid;
+use chrono::NaiveDateTime;
+use database::schema::contracts;
+use diesel::prelude::*;
 
-// use crate::{models::model::Model, shared::constants::blockchain::ContractStatus};
+use crate::Model;
 
-// #[derive(Debug)]
-// pub struct Contract {
-//     id: Uuid,
-//     contract_id: Uuid,
-//     contractor: Uuid,
-//     contractee: Uuid,
-//     title: String,
-//     description: String,
-//     contract: String,
-//     contract_status: ContractStatus,
-//     contractor_signiture: String,
-//     contractee_signiture: String,
-//     salt_value: Uuid,
-//     created_date: DateTime<Local>,
-//     updated_date: DateTime<Local>,
-// }
+#[derive(Queryable, Insertable, Selectable, Debug)]
+#[diesel(table_name = contracts)]
+pub struct Contract {
+    pub id: String,
+    pub contract_id: String,
+    pub contractor: String,
+    pub contractee: String,
+    pub title: String,
+    pub description: String,
+    pub contract: String,
+    pub contract_status: String,
+    pub contractor_signiture: String,
+    pub contractee_signiture: String,
+    pub salt_value: String,
+    pub created_date: NaiveDateTime,
+    pub updated_date: NaiveDateTime,
+}
 
-// impl Model for Contract {
-//     fn to_string(&self) -> String {
-//         return String::from(format!("Contract ID: {}", self.contract_id.to_string()));
-//     }
-// }
+impl Model for Contract {
+    fn to_string(&self) -> String {
+        return String::from(format!("Contract ID: {}", self.contract_id.to_string()));
+    }
+}

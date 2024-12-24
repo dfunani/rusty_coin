@@ -115,3 +115,53 @@ diesel::table! {
         updated_date -> Timestamp,
     }
 }
+
+diesel::table! {
+    transactions (id){
+        id -> Text,
+        transaction_id -> Text,
+        sender -> Text,
+        receiver -> Text,
+        amount -> Float8,
+        title -> Text,
+        description -> Text,
+        sender_signiture -> Text,
+        receiver_signiture -> Text,
+        transaction_status -> Text,
+        salt_value -> Text,
+        created_date -> Timestamp,
+        updated_date -> Timestamp,
+    }
+}
+
+diesel::table! {
+    contracts (id){
+        id -> Text,
+        contract_id -> Text,
+        contractor -> Text,
+        contractee -> Text,
+        title -> Text,
+        description -> Text,
+        contract -> Text,
+        contract_status -> Text,
+        contractor_signiture -> Text,
+        contractee_signiture -> Text,
+        salt_value -> Text,
+        created_date -> Timestamp,
+        updated_date -> Timestamp,
+    }
+}
+
+diesel::table! {
+    blocks(id) {
+        id -> Text,
+        block_id -> Text,
+        transaction_id -> Text,
+        contract_id -> Text,
+        previous_block_id -> Text,
+        next_block_id -> Text,
+        block_type -> Text,
+        created_date -> Timestamp,
+        updated_date -> Timestamp,
+    }
+}
