@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use chrono::Local;
 use database::schema::settings;
-use database::schema::users::dsl::*;
+use database::schema::settings::dsl::*;
 use diesel::{ExpressionMethods, PgConnection, QueryDsl, RunQueryDsl, SelectableHelper};
 
 use models::user::settings::Settings;
@@ -40,5 +40,19 @@ pub fn create_settings(db: &mut PgConnection, public_account_id: String) -> Sett
         .returning(Settings::as_returning())
         .get_result(db)
         .expect("Invalid User.");
+    return response;
+}
+
+pub fn read_settings(db: &mut PgConnection, public_id: String) -> Settings {
+    let responses: Vec<Settings> = settings
+        .filter(settings_id.eq(public_id))
+        .load(db)
+        .expect("Invalid User ID.");
+
+    if responses.len() != 1 {
+        panic!("Invalid User ID.");
+    }
+
+    let response = responses[0].clone();
     return response;
 }

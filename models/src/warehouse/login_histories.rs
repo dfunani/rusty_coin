@@ -4,7 +4,7 @@ use database::schema::login_histories;
 use diesel::prelude::*;
 use std::cmp::{Eq, Ord, PartialEq, PartialOrd};
 
-#[derive(Queryable, Insertable, Selectable, Debug, Ord, Eq, PartialOrd, PartialEq, Clone)]
+#[derive(Queryable, Insertable, Selectable, Debug, Clone)]
 #[diesel(table_name = login_histories)]
 pub struct LoginHistory {
     pub id: String,

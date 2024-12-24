@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use chrono::Local;
 use database::schema::payments;
-use database::schema::users::dsl::*;
+use database::schema::payments::dsl::*;
 use diesel::{ExpressionMethods, PgConnection, QueryDsl, RunQueryDsl, SelectableHelper};
 
 use models::user::payments::Payment;
@@ -15,17 +15,14 @@ use uuid::Uuid;
 
 use crate::warehouse::cards::create_cards;
 
-pub fn create_payments_profile(
-    db: &mut PgConnection,
-    account_id: String
-) -> Payment {
+pub fn create_payments_profile(db: &mut PgConnection, public_account_id: String) -> Payment {
     let card = create_cards(db);
 
     let payment = Payment {
         id: Uuid::new_v4().to_string(),
         payment_id: Uuid::new_v4().to_string(),
-        account_id: account_id,
-        card_id: card.id,
+        account_id: public_account_id,
+        card_id: card.card_id,
         name: String::from("New Payment Profile"),
         description: String::from("New Payment Profile Created."),
         balance: 0.0,
@@ -42,19 +39,19 @@ pub fn create_payments_profile(
     return response;
 }
 
-// pub fn read_user(db: &mut PgConnection, public_id: String) -> User {
-//     let responses: Vec<User> = users
-//         .filter(user_id.eq(public_id))
-//         .load(db)
-//         .expect("Invalid User ID.");
+pub fn read_payments_profile(db: &mut PgConnection, public_id: String) -> Payment {
+    let responses: Vec<Payment> = payments
+        .filter(payment_id.eq(public_id))
+        .load(db)
+        .expect("Invalid Payment ID.");
 
-//     if responses.len() != 1 {
-//         panic!("Invalid User ID.");
-//     }
+    if responses.len() != 1 {
+        panic!("Invalid Payment ID.");
+    }
 
-//     let response = responses[0].clone();
-//     return response;
-// }
+    let response = responses[0].clone();
+    return response;
+}
 
 // pub fn update_user(db: &mut PgConnection, private_id: String, data: &mut UpdateUser) -> User {
 //     if data.password != None {

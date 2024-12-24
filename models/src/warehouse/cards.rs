@@ -4,7 +4,7 @@ use database::schema::cards;
 use diesel::prelude::*;
 use std::cmp::{Eq, Ord, PartialEq, PartialOrd};
 
-#[derive(Queryable, Insertable, Selectable, Debug, Ord, Eq, PartialOrd, PartialEq, Clone)]
+#[derive(Queryable, Insertable, Selectable, Debug, Clone)]
 #[diesel(table_name = cards)]
 pub struct Card {
     pub id: String,
@@ -20,6 +20,6 @@ pub struct Card {
 
 impl Model for Card {
     fn to_string(&self) -> String {
-        return String::from(format!("Login history ID: {}", self.card_id.to_string()));
+        return String::from(format!("Card ID: {}", self.card_id.to_string()));
     }
 }

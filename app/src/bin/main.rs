@@ -8,10 +8,10 @@ use serialisers::{
     },
     user::users::{delete_user, read_user, update_user},
 };
-use shared::constants::users::{Role, Status};
+use shared::{constants::users::{Role, Status}, utils::helpers::extract_object_id};
 
 // #[launch]
-fn main() {
+fn main() {    
     dotenv().ok();
     let db = &mut connection::db_connection();
 
@@ -30,5 +30,6 @@ fn main() {
     println!("{:#?}", user_object.get_mut("profile").unwrap());
     println!("{:#?}", user_object.get_mut("settings").unwrap());
     println!("{:#?}", user_object.get_mut("login").unwrap());
+    println!("{:#?}", user_object.get_mut("card").unwrap());
     println!("{:#?}", block);
 }

@@ -1,6 +1,7 @@
 use chrono::Local;
 use database::schema::login_histories;
-use diesel::{PgConnection, RunQueryDsl, SelectableHelper};
+use database::schema::login_histories::dsl::*;
+use diesel::{ExpressionMethods, PgConnection, QueryDsl, RunQueryDsl, SelectableHelper};
 
 use models::warehouse::login_histories::LoginHistory;
 use shared::constants::users::{Country, LoginMethod};
@@ -28,4 +29,18 @@ pub fn create_login_history(db: &mut PgConnection) -> LoginHistory {
         .get_result(db)
         .expect("Invalid Login History.");
     return login_history;
+}
+
+pub fn read_login_history(db: &mut PgConnection, public_id: String) -> LoginHistory {
+    let responses: Vec<LoginHistory> = login_histories
+        .filter(login_id.eq(public_id))
+        .load(db)
+        .expect("Invalid Login History ID.");
+
+    if responses.len() != 1 {
+        panic!("Invalid Login History ID.");
+    }
+
+    let response = responses[0].clone();
+    return response;
 }

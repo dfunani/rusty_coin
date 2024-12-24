@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use chrono::Local;
 use database::schema::accounts;
-use database::schema::users::dsl::*;
+use database::schema::accounts::dsl::*;
 use diesel::{ExpressionMethods, PgConnection, QueryDsl, RunQueryDsl, SelectableHelper};
 
 use models::user::accounts::Account;
@@ -27,19 +27,19 @@ pub fn create_account(db: &mut PgConnection, private_user_id: String) -> Account
     return response;
 }
 
-// pub fn read_user(db: &mut PgConnection, public_id: String) -> User {
-//     let responses: Vec<User> = users
-//         .filter(user_id.eq(public_id))
-//         .load(db)
-//         .expect("Invalid User ID.");
+pub fn read_account(db: &mut PgConnection, public_id: String) -> Account {
+    let responses: Vec<Account> = accounts
+        .filter(account_id.eq(public_id))
+        .load(db)
+        .expect("Invalid Account ID.");
 
-//     if responses.len() != 1 {
-//         panic!("Invalid User ID.");
-//     }
+    if responses.len() != 1 {
+        panic!("Invalid Account ID.");
+    }
 
-//     let response = responses[0].clone();
-//     return response;
-// }
+    let response = responses[0].clone();
+    return response;
+}
 
 // pub fn update_user(db: &mut PgConnection, private_id: String, data: &mut UpdateUser) -> User {
 //     if data.password != None {

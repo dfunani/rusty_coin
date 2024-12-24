@@ -5,7 +5,7 @@ use std::cmp::{Eq, Ord, PartialEq, PartialOrd};
 
 use crate::Model;
 
-#[derive(Queryable, Insertable, Selectable, Debug, Ord, Eq, PartialOrd, PartialEq, Clone)]
+#[derive(Queryable, Insertable, Selectable, Debug, Clone)]
 #[diesel(table_name = users)]
 pub struct User {
     pub id: String,

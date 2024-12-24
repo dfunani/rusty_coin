@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use chrono::Local;
 use database::schema::profiles;
-use database::schema::users::dsl::*;
+use database::schema::profiles::dsl::*;
 use diesel::{ExpressionMethods, PgConnection, QueryDsl, RunQueryDsl, SelectableHelper};
 
 use models::user::profiles::Profile;
@@ -42,19 +42,19 @@ pub fn create_profile(db: &mut PgConnection, public_account_id: String) -> Profi
     return response;
 }
 
-// pub fn read_user(db: &mut PgConnection, public_id: String) -> User {
-//     let responses: Vec<User> = users
-//         .filter(user_id.eq(public_id))
-//         .load(db)
-//         .expect("Invalid User ID.");
+pub fn read_profile(db: &mut PgConnection, public_id: String) -> Profile {
+    let responses: Vec<Profile> = profiles
+        .filter(profile_id.eq(public_id))
+        .load(db)
+        .expect("Invalid User ID.");
 
-//     if responses.len() != 1 {
-//         panic!("Invalid User ID.");
-//     }
+    if responses.len() != 1 {
+        panic!("Invalid User ID.");
+    }
 
-//     let response = responses[0].clone();
-//     return response;
-// }
+    let response = responses[0].clone();
+    return response;
+}
 
 // pub fn update_user(db: &mut PgConnection, private_id: String, data: &mut UpdateUser) -> User {
 //     if data.password != None {

@@ -4,7 +4,7 @@ use diesel::prelude::*;
 
 use crate::Model;
 
-#[derive(Queryable, Insertable, Selectable, Debug)]
+#[derive(Queryable, Insertable, Selectable, Debug, Clone)]
 #[diesel(table_name = payments)]
 pub struct Payment {
     pub id: String,
@@ -21,6 +21,6 @@ pub struct Payment {
 
 impl Model for Payment {
     fn to_string(&self) -> String {
-        return String::from(format!("Payment ID: {}", self.account_id.to_string()));
+        return String::from(format!("Payment ID: {}", self.payment_id.to_string()));
     }
 }

@@ -1532,6 +1532,7 @@ dependencies = [
  "diesel",
  "models",
  "rand",
+ "regex",
  "rocket",
  "serde",
  "sha2",

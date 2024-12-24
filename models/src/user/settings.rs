@@ -10,7 +10,7 @@ pub struct Interests {
     interest: String,
 }
 
-#[derive(Queryable, Insertable, Selectable, Debug)]
+#[derive(Queryable, Insertable, Selectable, Debug, Clone)]
 #[diesel(table_name = settings)]
 pub struct Settings {
     pub id: String,
@@ -32,6 +32,6 @@ pub struct Settings {
 
 impl Model for Settings {
     fn to_string(&self) -> String {
-        return String::from(format!("Account ID: {}", self.account_id.to_string()));
+        return String::from(format!("Settings ID: {}", self.settings_id.to_string()));
     }
 }

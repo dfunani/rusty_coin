@@ -1,6 +1,6 @@
 use chrono::Local;
 use database::schema::transactions;
-use database::schema::users::dsl::*;
+use database::schema::transactions::dsl::*;
 use diesel::{ExpressionMethods, PgConnection, QueryDsl, RunQueryDsl, SelectableHelper};
 
 use models::blockchain::transactions::Transaction;
@@ -36,41 +36,16 @@ pub fn create_transaction(
     return response;
 }
 
-// pub fn read_user(db: &mut PgConnection, public_id: String) -> User {
-//     let responses: Vec<User> = users
-//         .filter(user_id.eq(public_id))
-//         .load(db)
-//         .expect("Invalid User ID.");
+pub fn read_transaction(db: &mut PgConnection, public_id: String) -> Transaction {
+    let responses: Vec<Transaction> = transactions
+        .filter(transaction_id.eq(public_id))
+        .load(db)
+        .expect("Invalid Account ID.");
 
-//     if responses.len() != 1 {
-//         panic!("Invalid User ID.");
-//     }
+    if responses.len() != 1 {
+        panic!("Invalid Account ID.");
+    }
 
-//     let response = responses[0].clone();
-//     return response;
-// }
-
-// pub fn update_user(db: &mut PgConnection, private_id: String, data: &mut UpdateUser) -> User {
-//     if data.password != None {
-//         data.password = Some(hash(data.password.as_ref().unwrap()));
-//     };
-
-//     if data.updated_date != None {
-//         data.updated_date = Some(Local::now().naive_local());
-//     }
-
-//     let update_data = data.clone();
-//     let response = diesel::update(users.find(private_id))
-//         .set(update_data)
-//         .get_result(db)
-//         .expect("Invalid ID - User");
-//     return response;
-// }
-
-// pub fn delete_user(db: &mut PgConnection, private_id: String) -> String {
-//     diesel::delete(users.find(private_id.clone()))
-//         .returning(User::as_returning())
-//         .execute(db)
-//         .expect("Invalid ID - User");
-//     return String::from(format!("Deleted {}", private_id));
-// }
+    let response = responses[0].clone();
+    return response;
+}
